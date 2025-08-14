@@ -42,21 +42,16 @@ For this submission, the chosen data provider is **FireHOL Level 1 IP Blocklist*
 
 ## Project Structure
 
+```bash
 SamahSyed_3122225001120_C
-
 ├── etl_connector.py: Main ETL pipeline script
-
 ├── test_integration.py: Integration tests for full ETL flow
-
 ├── test_validation.py: Unit tests for validation and transformation logic
-
-├── .env # Environment: variables (excluded from Git)
-
+├── .env: Environment variables (excluded from Git)
 ├── requirements.txt: Python dependencies
-
-├── README.md: Documentation (this file)
-
+└── README.md: Documentation (this file)
 .gitignore: Ignore sensitive & unnecessary files such as .env, __pycache__, venv
+```
 
 ## Installation & Setup
 
