@@ -49,53 +49,53 @@ For this submission, the chosen data provider is **FireHOL Level 1 IP Blocklist*
 ## Installation & Setup
 
 ### 1. Clone the repository
-\`\`\`bash
+```bash
 git clone <repo_url>
 cd <repo_folder>
-\`\`\`
+```
 
 ### 2. Create and activate a virtual environment
-\`\`\`bash
+```bash
 python -m venv venv
 source venv/bin/activate # On Windows: venv\Scripts\activate
-\`\`\`
+```
 
 ### 3. Install dependencies
-\`\`\`bash
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
 ### 4. Create `.env` file
 Create a `.env` file in the project root with the following variables:
 
-\`\`\`bash
+```bash
 MONGO_URI=your_mongo_uri
 DB_NAME=your_db_name
 COLLECTION_NAME=your_collection_name
-\`\`\`
+```
 
 ## Running the ETL Pipeline
-\`\`\`bash
+```bash
 python etl_connector.py
-\`\`\`
+```
 
 ## MongoDB Collection Design
 Each document in MongoDB looks like:
-\`\`\`json
+```json
 {
   "ip": "203.0.113.0/24",
   "type": "cidr",
   "ingested_at": "2025-08-14T10:15:30.000Z"
 }
-\`\`\`
+```
 
 ## Testing & Validation
 
 ### Run all tests
-\`\`\`bash
+```bash
 python test_integration.py
 python test_validation.py
-\`\`\`
+```
 
 ### Test coverage includes:
 - Handles invalid entries in the blocklist.  
