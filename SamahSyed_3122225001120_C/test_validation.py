@@ -17,7 +17,7 @@ def test_transform_logic():
     assert ip_record["ip"] == "192.168.0.1"
     assert cidr_record["ip"] == "192.168.0.0/24"
 
-    print("✅ Validation test passed.")
+    print("Validation test passed.")
 
 if __name__ == "__main__":
     test_transform_logic()

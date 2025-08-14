@@ -28,10 +28,10 @@ def get_collection(db_name, collection_name):
         db = client[db_name]
         coll = db[collection_name]
         client.admin.command('ping')
-        logging.info(f"✅ Connected to MongoDB database: {db_name}, collection: {collection_name}")
+        logging.info(f"Connected to MongoDB database: {db_name}, collection: {collection_name}")
         return coll
     except errors.ConnectionFailure as e:
-        logging.error(f"❌ Could not connect to MongoDB: {e}")
+        logging.error(f"Could not connect to MongoDB: {e}")
         raise
 
 # ------------------- ETL Functions -------------------
@@ -44,7 +44,7 @@ def extract():
         response.raise_for_status()
         return response.text.splitlines()
     except requests.exceptions.RequestException as e:
-        logging.error(f"❌ Extraction failed: {e}")
+        logging.error(f"Extraction failed: {e}")
         return []
 
 def transform(data):
@@ -77,15 +77,15 @@ def transform(data):
                     "ingested_at": datetime.utcnow()
                 })
         except ValueError:
-            logging.warning(f"⚠️ Skipping invalid entry: {line}")
+            logging.warning(f"Skipping invalid entry: {line}")
 
-    logging.info(f"✅ Transformation complete. {len(cleaned)} unique valid records found.")
+    logging.info(f"Transformation complete. {len(cleaned)} unique valid records found.")
     return cleaned
 
 def load(records, coll):
     """Insert transformed data into MongoDB with batching."""
     if not records:
-        logging.warning("⚠️ No valid records to insert.")
+        logging.warning("No valid records to insert.")
         return
 
     logging.info(f"Loading {len(records)} records into MongoDB ...")
@@ -98,16 +98,15 @@ def load(records, coll):
                     {"$set": rec},
                     upsert=True
                 )
-        logging.info("✅ Data loaded successfully.")
+        logging.info("Data loaded successfully.")
     except errors.PyMongoError as e:
-        logging.error(f"❌ Failed to insert into MongoDB: {e}")
+        logging.error(f"Failed to insert into MongoDB: {e}")
 
 def run_pipeline(db_name=None, collection_name=None):
     """Run full ETL pipeline with optional DB and collection override."""
     start_time = datetime.utcnow()
-    logging.info("🚀 ETL Pipeline started.")
+    logging.info("ETL Pipeline started.")
 
-    # Allow test to override DB and collection names
     db_name = db_name or DEFAULT_DB_NAME
     collection_name = collection_name or DEFAULT_COLLECTION_NAME
 
@@ -118,7 +117,7 @@ def run_pipeline(db_name=None, collection_name=None):
     load(transformed_data, coll)
 
     end_time = datetime.utcnow()
-    logging.info(f"🏁 ETL Pipeline finished. Duration: {end_time - start_time}")
+    logging.info(f"ETL Pipeline finished. Duration: {end_time - start_time}")
 
 # ------------------- Main -------------------
 if __name__ == "__main__":

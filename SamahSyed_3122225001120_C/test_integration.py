@@ -29,7 +29,7 @@ def test_full_pipeline():
     assert all(rec["type"] in ["ip", "cidr"] for rec in records), "Invalid type classification"
     assert len({rec["ip"] for rec in records}) == len(records), "Duplicates found"
 
-    print("✅ Integration test passed.")
+    print("Integration test passed.")
 
 if __name__ == "__main__":
     test_full_pipeline()
